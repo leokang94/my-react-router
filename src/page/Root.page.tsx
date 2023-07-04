@@ -2,18 +2,26 @@ import { Layout } from "../components/Layout";
 import { useRouter } from "../lib/Router";
 
 const RootPage = () => {
-  const { push } = useRouter();
+  const { push, replace } = useRouter();
 
   const moveToAbout = () => {
     push("/about");
+  };
+  const replaceToAbout = () => {
+    replace("/about");
   };
 
   return (
     <Layout>
       <div>Root page</div>
-      <button type="button" onClick={moveToAbout}>
-        Go to about page
-      </button>
+      <div style={{ display: "flex", gap: "10px" }}>
+        <button type="button" onClick={moveToAbout}>
+          Go to about page
+        </button>
+        <button type="button" onClick={replaceToAbout}>
+          replace to about page
+        </button>
+      </div>
     </Layout>
   );
 };

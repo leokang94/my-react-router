@@ -91,18 +91,28 @@ export const RouterProvider = ({ children }: { children: React.ReactNode }) => {
               nextIndex += 1;
               customState = { ...customState, currentIndex: nextIndex };
 
+              // history stack에 이미 nextIndex가 있다면 대체한다.
+              if (historyRef.current[nextIndex]) {
+                historyRef.current = [
+                  ...historyRef.current.slice(0, nextIndex),
+                  path as string,
+                ];
+                setHistory(historyRef.current);
+              } else {
+                historyRef.current = [...historyRef.current, path as string];
+                setHistory(historyRef.current);
+              }
+
               setCurrentIndex((prev) => prev + 1);
-              setHistory((prev) => [...prev, path as string]);
-              historyRef.current = [...historyRef.current, path as string];
             } else {
               customState = { ...customState, currentIndex: nextIndex };
 
+              historyRef.current[currentIndex] = path as string;
               setHistory((prev) => {
                 const next = [...prev];
                 next[currentIndex] = path as string;
                 return next;
               });
-              historyRef.current[currentIndex] = path as string;
             }
             saveToSessionStorage(nextIndex, historyRef.current);
 
