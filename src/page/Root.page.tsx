@@ -4,14 +4,14 @@ import { useRouter } from "../lib/Router";
 const RootPage = () => {
   const { push } = useRouter();
 
-  const movetoAbout = () => {
+  const moveToAbout = () => {
     push("/about");
   };
 
   return (
     <Layout>
       <div>Root page</div>
-      <button type="button" onClick={movetoAbout}>
+      <button type="button" onClick={moveToAbout}>
         Go to about page
       </button>
     </Layout>
