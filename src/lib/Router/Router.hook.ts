@@ -1,7 +1,6 @@
-export const useRouter = () => {
-  const push = (path: string) => {
-    console.warn(`Not implemented 'push' method, but targetpath is '${path}'`);
-  };
+import { useRouterContext } from "./Router.context";
 
-  return { push } as const;
+export const useRouter = () => {
+  const { currentIndex, history, push, replace } = useRouterContext();
+  return { currentIndex, history, push, replace } as const;
 };
