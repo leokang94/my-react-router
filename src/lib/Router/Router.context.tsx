@@ -23,8 +23,6 @@ const initialRouterContext: RouterContext = {
   },
 };
 
-// const SESSION_STORAGE_INDEX_KEY = "my-react-router-currentIndex";
-// const SESSION_STORAGE_HISTORY_KEY = "my-react-router-history";
 const CHANGE_STATE = ["pushState", "replaceState"] as const;
 
 const routerContext = createContext<RouterContext>(initialRouterContext);
@@ -33,24 +31,10 @@ export const useRouterContext = () => {
   return useContext(routerContext);
 };
 
-const getInitialIndex = () => {
-  // return Number(sessionStorage.getItem(SESSION_STORAGE_INDEX_KEY)) ?? 0;
-  return 0;
-};
-
-const getInitialHistory = () => {
-  // const historyFromSessionHistory = sessionStorage.getItem(
-  //   SESSION_STORAGE_HISTORY_KEY,
-  // );
-  // return historyFromSessionHistory
-  //   ? JSON.parse(historyFromSessionHistory)
-  //   : [window.location.pathname];
-
-  return [window.location.pathname];
-};
+const getInitialHistory = () => [window.location.pathname];
 
 export const RouterProvider = ({ children }: { children: React.ReactNode }) => {
-  const [currentIndex, setCurrentIndex] = React.useState(getInitialIndex());
+  const [currentIndex, setCurrentIndex] = React.useState(0);
   const [history, setHistory] = React.useState<string[]>(getInitialHistory());
   const historyRef = useRef<string[]>(getInitialHistory());
   const [routerMap, setRouterMap] = React.useState<
@@ -64,14 +48,6 @@ export const RouterProvider = ({ children }: { children: React.ReactNode }) => {
     pushState: window.history.pushState,
     replaceState: window.history.replaceState,
   });
-
-  // const saveToSessionStorage = (index: number, history: string[]) => {
-  //   sessionStorage.setItem(SESSION_STORAGE_INDEX_KEY, index.toString());
-  //   sessionStorage.setItem(
-  //     SESSION_STORAGE_HISTORY_KEY,
-  //     JSON.stringify(history),
-  //   );
-  // };
 
   const setChangeProxy = useCallback(() => {
     CHANGE_STATE.forEach((changeState) => {
@@ -89,8 +65,6 @@ export const RouterProvider = ({ children }: { children: React.ReactNode }) => {
           ) => {
             let customState: HistoryState = { ...state, currentIndex };
             let nextIndex = currentIndex;
-
-            console.log("changeState", changeState);
 
             if (changeState === "pushState") {
               nextIndex += 1;
@@ -119,7 +93,6 @@ export const RouterProvider = ({ children }: { children: React.ReactNode }) => {
                 return next;
               });
             }
-            // saveToSessionStorage(nextIndex, historyRef.current);
 
             return target.apply(thisArg, [customState, unused, path]);
           },
@@ -157,7 +130,6 @@ export const RouterProvider = ({ children }: { children: React.ReactNode }) => {
     const nextIndex = (e.state as HistoryState).currentIndex;
 
     setCurrentIndex(nextIndex);
-    // saveToSessionStorage(nextIndex, history);
   }, []);
 
   useEffect(() => {
