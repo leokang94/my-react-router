@@ -2,7 +2,8 @@ type RouteProps = {
   path: string;
   component: React.ReactNode;
 };
-const Route: React.FC<RouteProps> = ({ path, component }) => {
+
+export const Route: React.FC<RouteProps> = ({ path, component }) => {
   return (
     <>
       <h1>{"<Route />"}</h1>
@@ -12,5 +13,3 @@ const Route: React.FC<RouteProps> = ({ path, component }) => {
     </>
   );
 };
-
-export default Route;

@@ -1,8 +1,7 @@
 type RouterProps = {
   children: React.ReactNode;
 };
-const Router: React.FC<RouterProps> = ({ children }) => {
+
+export const Router: React.FC<RouterProps> = ({ children }) => {
   return <>{children}</>;
 };
-
-export default Router;

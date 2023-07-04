@@ -1,6 +1,5 @@
 import "./App.css";
-import Route from "./lib/Router/Route";
-import Router from "./lib/Router/Router";
+import { Route, Router } from "./lib/Router";
 import { Suspense, lazy } from "react";
 
 const RootPage = lazy(() => import("./page/Root.page"));
