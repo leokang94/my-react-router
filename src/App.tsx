@@ -1,4 +1,5 @@
 import "./App.css";
+import { Page } from "./components/Page";
 import { Route, Router } from "./lib/Router";
 import { Suspense, lazy } from "react";
 
@@ -9,8 +10,10 @@ function App() {
   return (
     <Suspense>
       <Router>
-        <Route path="/" component={<RootPage />} />
-        <Route path="/about" component={<AboutPage />} />
+        <Page>
+          <Route path="/" component={<RootPage />} />
+          <Route path="/about" component={<AboutPage />} />
+        </Page>
       </Router>
     </Suspense>
   );
