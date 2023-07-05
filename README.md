@@ -310,6 +310,66 @@ function App() {
 export default App;
 ```
 
-### Page Component (optional)
+### Page Components (src/page/About.page.tsx, src/page/Root.page.tsx)
 
-`currentIndex`, `history` 를 확인해볼 수 있도록 렌더링해주는 컴포넌트입니다. (확인의 용도로 만든거라, 필수가 아닙니다.)
+각 Page Component에서는 `useRouter()` 를 사용해 `push`, `replace` 함수를 사용합니다.
+
+#### Root.page.tsx
+
+```tsx
+import { Layout } from "../components/Layout";
+import { useRouter } from "../lib/Router";
+
+const RootPage = () => {
+  const { push, replace } = useRouter();
+
+  const moveToAbout = () => {
+    push("/about");
+  };
+  const replaceToAbout = () => {
+    replace("/about");
+  };
+
+  return (
+    <Layout>
+      <div>Root page</div>
+      <div style={{ display: "flex", gap: "10px" }}>
+        <button type="button" onClick={moveToAbout}>
+          Go to about page
+        </button>
+        <button type="button" onClick={replaceToAbout}>
+          replace to about page
+        </button>
+      </div>
+    </Layout>
+  );
+};
+
+export default RootPage;
+```
+
+#### About.page.tsx
+
+```tsx
+import { Layout } from "../components/Layout";
+import { useRouter } from "../lib/Router";
+
+const AboutPage = () => {
+  const { push } = useRouter();
+
+  const moveToRoot = () => {
+    push("/");
+  };
+
+  return (
+    <Layout>
+      <div>About page</div>
+      <button type="button" onClick={moveToRoot}>
+        Go to root page
+      </button>
+    </Layout>
+  );
+};
+
+export default AboutPage;
+```
