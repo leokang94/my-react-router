@@ -23,6 +23,7 @@ npm, yarn과 같은 package manager 입니다. 때문에 clone해 사용한다�
 ### [Rome](https://rome.tools/)
 
 prettier와 같은 formatting 기능, eslint와 같은 linter 기능을 모아서 제공해주는 라이브러리 입니다.
+
 특별히 세팅하실 건 없고, vscode extension recommendation 세팅이 되어 있어, clone 후 vscode로 열 경우 추천되는 확장 프로그램을 설치해주시면 됩니다.
 
 ## 1. 요구사항
@@ -241,6 +242,7 @@ export const Router: React.FC<RouterProps> = ({ children }) => {
 ### Route.tsx
 
 `Router.context.tsx` 에서 export된 `useRouterContext()`의 `routerMap`, `pushToMap` 을 사용합니다.
+
 `pushToMap` 으로 `routerMap` 에 `[path, component]`를 넣어주고, `window.location.pathname`과 `path`가 일치할 경우 `routerMap` 에서 현재 경로에 대한 컴포넌트를 렌더링합니다.
 
 ```tsx
