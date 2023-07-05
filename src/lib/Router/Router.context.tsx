@@ -112,15 +112,12 @@ export const RouterProvider = ({ children }: { children: React.ReactNode }) => {
     [],
   );
 
-  const push = useCallback<RouterContextDispatcher["push"]>(
-    (path: string, state) => {
-      window.history.pushState(state, "", path);
-    },
-    [],
-  );
+  const push = useCallback<RouterContextDispatcher["push"]>((path, state) => {
+    window.history.pushState(state, "", path);
+  }, []);
 
   const replace = useCallback<RouterContextDispatcher["replace"]>(
-    (path: string, state) => {
+    (path, state) => {
       window.history.replaceState(state, "", path);
     },
     [],
