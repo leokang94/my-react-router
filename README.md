@@ -1,4 +1,4 @@
-# React와 History API를 사요애 SPA Router 기능 구현하기
+# React와 History API를 사용해 SPA Router 기능 구현하기
 
 ## 0. 시작에 앞서..
 
