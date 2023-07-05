@@ -1,4 +1,5 @@
 import { useRouter } from "../lib/Router";
+import React from "react";
 
 type PageProps = {
   children: React.ReactNode;
@@ -28,8 +29,10 @@ export const Page: React.FC<PageProps> = ({ children }) => {
         <h2>
           history stack : [
           {highlighted.map((h, i) => {
-            if (i === highlighted.length - 1) return <>{h}</>;
-            return <>{h}, </>;
+            const key = `${h}-${i}`;
+            if (i === highlighted.length - 1)
+              return <React.Fragment key={key}>{h}</React.Fragment>;
+            return <React.Fragment key={key}>{h}, </React.Fragment>;
           })}
           ]
         </h2>
