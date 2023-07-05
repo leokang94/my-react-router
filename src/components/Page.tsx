@@ -26,12 +26,12 @@ export const Page: React.FC<PageProps> = ({ children }) => {
       <div>
         <h1>current history Index: {currentIndex}</h1>
         <h2>
-          history stack : {"["}
+          history stack : [
           {highlighted.map((h, i) => {
             if (i === highlighted.length - 1) return <>{h}</>;
             return <>{h}, </>;
           })}
-          {"]"}
+          ]
         </h2>
       </div>
       {children}
