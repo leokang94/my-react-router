@@ -9,7 +9,12 @@ type RouteProps = {
 export const Route: React.FC<RouteProps> = ({ path, component }) => {
   const { routerMap, pushToMap } = useRouterContext();
 
-  const canRender = path === window.location.pathname;
+  const canRender =
+    path === window.location.pathname && routerMap.get(path) === component;
+
+  useEffect(() => {
+    console.log(routerMap);
+  }, [routerMap]);
 
   useEffect(() => {
     pushToMap(path, component);
