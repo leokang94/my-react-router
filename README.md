@@ -243,7 +243,7 @@ export const Router: React.FC<RouterProps> = ({ children }) => {
 
 `Router.context.tsx` 에서 export된 `useRouterContext()`의 `routerMap`, `pushToMap` 을 사용합니다.
 
-`pushToMap` 으로 `routerMap` 에 `[path, component]`를 넣어주고, `window.location.pathname`과 `path`가 일치할 경우 `routerMap` 에서 현재 경로에 대한 컴포넌트를 렌더링합니다.
+`pushToMap` 으로 `routerMap` 에 `[path, component]`를 넣어주고, `window.location.pathname`과 `path`, 해당 `path`에 해당하는 component와 prosp로 들어온 component가 같은 경우 `routerMap` 에서 현재 경로에 대한 컴포넌트를 렌더링합니다.
 
 ```tsx
 import { useRouterContext } from "./Router.context";
@@ -257,7 +257,8 @@ type RouteProps = {
 export const Route: React.FC<RouteProps> = ({ path, component }) => {
   const { routerMap, pushToMap } = useRouterContext();
 
-  const canRender = path === window.location.pathname;
+  const canRender =
+    path === window.location.pathname && routerMap.get(path) === component;
 
   useEffect(() => {
     pushToMap(path, component);
@@ -309,6 +310,8 @@ function App() {
 
 export default App;
 ```
+
+이 때, `<Route>` 컴포넌트에 동일한 path를 넣게 되면, 마지막에 세팅한 컴포넌트로 그려집니다.
 
 ### Page Components (src/page/About.page.tsx, src/page/Root.page.tsx)
 
